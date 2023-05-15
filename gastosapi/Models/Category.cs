@@ -5,9 +5,9 @@ namespace gastosapi.Models;
 
 public partial class Category
 {
-    public int IdCategory { get; set; }
+    internal int? IdCategory { get; set; }
 
     public string CategoryName { get; set; } = null!;
 
-    public virtual ICollection<Operation> Operations { get; set; } = new List<Operation>();
+    internal virtual ICollection<Operation> Operations { get; set; } = new List<Operation>();
 }

@@ -5,7 +5,7 @@ namespace gastosapi.Models;
 
 public partial class Operation
 {
-    public int IdOperations { get; set; }
+    internal int? IdOperations { get; set; }
 
     public decimal Amount { get; set; }
 
@@ -17,7 +17,7 @@ public partial class Operation
 
     public string Created { get; set; } = null!;
 
-    public virtual Category IdCategoryNavigation { get; set; } = null!;
+    internal virtual Category? IdCategoryNavigation { get; set; }
 
-    public virtual User IdUserNavigation { get; set; } = null!;
+    internal virtual User? IdUserNavigation { get; set; }
 }
