@@ -5,7 +5,7 @@ namespace gastosapi.Models;
 
 public partial class User
 {
-    internal int IdUser { get; set; }
+    public int IdUser { get; set; }
 
     public string Username { get; set; } = null!;
 

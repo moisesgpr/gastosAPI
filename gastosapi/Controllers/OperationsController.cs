@@ -49,6 +49,24 @@ namespace gastosapi.Controllers
             return operation;
         }
 
+        // GET: api/Operations/
+        [HttpGet("/user/{userId}")]
+        public async Task<ActionResult<IEnumerable<Operation>>> GetOperationsByUser(int userId)
+        {
+            var operationsUser = _context.Operations.Where(o => o.IdUser == userId);
+
+            if (await _context.Users.FindAsync(userId) == null)
+            {
+                return NotFound("No existe este usuario");
+            }
+
+            if (operationsUser.Count() == 0)
+            {
+                return NotFound();
+            }
+            return await operationsUser.ToListAsync();
+        }
+
         // PUT: api/Operations/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -90,6 +108,7 @@ namespace gastosapi.Controllers
               return Problem("Entity set 'GastosappContext.Operations'  is null.");
           }
             _context.Operations.Add(operation);
+            
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetOperation", new { id = operation.IdOperations }, operation);

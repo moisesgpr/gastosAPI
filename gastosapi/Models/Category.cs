@@ -5,7 +5,7 @@ namespace gastosapi.Models;
 
 public partial class Category
 {
-    internal int? IdCategory { get; set; }
+    public int? IdCategory { get; set; }
 
     public string CategoryName { get; set; } = null!;
 
