@@ -28,7 +28,7 @@ namespace gastosapi.Controllers
           {
               return NotFound();
           }
-            return await _context.Operations.ToListAsync();
+            return await _context.Operations.Include(o => o.IdCategoryNavigation).ToListAsync();
         }
 
         // GET: api/Operations/5
