@@ -5,7 +5,7 @@ namespace gastosapi.Models;
 
 public partial class Operation
 {
-    public int? IdOperations { get; set; }
+    public int? IdOperation { get; set; }
 
     public decimal Amount { get; set; }
 

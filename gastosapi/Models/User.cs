@@ -11,5 +11,5 @@ public partial class User
 
     public string Password { get; set; } = null!;
 
-    internal virtual ICollection<Operation> Operations { get; set; } = new List<Operation>();
+    internal virtual ICollection<Operation> Operation { get; set; } = new List<Operation>();
 }

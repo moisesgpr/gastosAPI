@@ -17,13 +17,15 @@ public partial class GastosappContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
-    public virtual DbSet<Operation> Operations { get; set; }
+    public virtual DbSet<Operation> Operation { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=PR\\SQLExpress;Database=gastosapp;Trusted_Connection=True;TrustServerCertificate=true");
+        //=> optionsBuilder.UseSqlServer("Server=PR\\SQLExpress;Database=gastosapp;Trusted_Connection=True;TrustServerCertificate=true");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-SDKDVL8;Database=gastosapp;Trusted_Connection=True;TrustServerCertificate=true");
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -42,9 +44,9 @@ public partial class GastosappContext : DbContext
 
         modelBuilder.Entity<Operation>(entity =>
         {
-            entity.HasKey(e => e.IdOperations);
+            entity.HasKey(e => e.IdOperation);
 
-            entity.Property(e => e.IdOperations).HasColumnName("idOperations");
+            entity.Property(e => e.IdOperation).HasColumnName("idOperation");
             entity.Property(e => e.Amount)
                 .HasColumnType("decimal(16, 2)")
                 .HasColumnName("amount");
@@ -59,15 +61,15 @@ public partial class GastosappContext : DbContext
             entity.Property(e => e.IdCategory).HasColumnName("idCategory");
             entity.Property(e => e.IdUser).HasColumnName("idUser");
 
-            entity.HasOne(d => d.IdCategoryNavigation).WithMany(p => p.Operations)
+            entity.HasOne(d => d.IdCategoryNavigation).WithMany(p => p.Operation)
                 .HasForeignKey(d => d.IdCategory)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Operations_Category");
+                .HasConstraintName("FK_Operation_Category");
 
-            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Operations)
+            entity.HasOne(d => d.IdUserNavigation).WithMany(p => p.Operation)
                 .HasForeignKey(d => d.IdUser)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Operations_Users");
+                .HasConstraintName("FK_Operation_Users");
         });
 
         modelBuilder.Entity<User>(entity =>

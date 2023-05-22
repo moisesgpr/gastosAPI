@@ -11,35 +11,35 @@ namespace gastosapi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OperationsController : ControllerBase
+    public class OperationController : ControllerBase
     {
         private readonly GastosappContext _context;
 
-        public OperationsController(GastosappContext context)
+        public OperationController(GastosappContext context)
         {
             _context = context;
         }
 
-        // GET: api/Operations
+        // GET: api/Operation
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Operation>>> GetOperations()
+        public async Task<ActionResult<IEnumerable<Operation>>> GetOperation()
         {
-          if (_context.Operations == null)
+          if (_context.Operation == null)
           {
               return NotFound();
           }
-            return await _context.Operations.Include(o => o.IdCategoryNavigation).ToListAsync();
+            return await _context.Operation.Include(o => o.IdCategoryNavigation).ToListAsync();
         }
 
-        // GET: api/Operations/5
+        // GET: api/Operation/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Operation>> GetOperation(int id)
         {
-          if (_context.Operations == null)
+          if (_context.Operation == null)
           {
               return NotFound();
           }
-            var operation = await _context.Operations.FindAsync(id);
+            var operation = await _context.Operation.FindAsync(id);
 
             if (operation == null)
             {
@@ -49,11 +49,11 @@ namespace gastosapi.Controllers
             return operation;
         }
 
-        // GET: api/Operations/
+        // GET: api/Operation/
         [HttpGet("/user/{userId}")]
-        public async Task<ActionResult<IEnumerable<Operation>>> GetOperationsByUser(int userId)
+        public async Task<ActionResult<IEnumerable<Operation>>> GetOperationByUser(int userId)
         {
-            var operationsUser = _context.Operations.Where(o => o.IdUser == userId);
+            var operationsUser = _context.Operation.Where(o => o.IdUser == userId);
 
             if (await _context.Users.FindAsync(userId) == null)
             {
@@ -67,12 +67,12 @@ namespace gastosapi.Controllers
             return await operationsUser.ToListAsync();
         }
 
-        // PUT: api/Operations/5
+        // PUT: api/Operation/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOperation(int id, Operation operation)
         {
-            if (id != operation.IdOperations)
+            if (id != operation.IdOperation)
             {
                 return BadRequest();
             }
@@ -98,37 +98,37 @@ namespace gastosapi.Controllers
             return NoContent();
         }
 
-        // POST: api/Operations
+        // POST: api/Operation
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Operation>> PostOperation(Operation operation)
         {
-          if (_context.Operations == null)
+          if (_context.Operation == null)
           {
-              return Problem("Entity set 'GastosappContext.Operations'  is null.");
+              return Problem("Entity set 'GastosappContext.Operation'  is null.");
           }
-            _context.Operations.Add(operation);
+            _context.Operation.Add(operation);
             
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetOperation", new { id = operation.IdOperations }, operation);
+            return CreatedAtAction("GetOperation", new { id = operation.IdOperation }, operation);
         }
 
-        // DELETE: api/Operations/5
+        // DELETE: api/Operation/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOperation(int id)
         {
-            if (_context.Operations == null)
+            if (_context.Operation == null)
             {
                 return NotFound();
             }
-            var operation = await _context.Operations.FindAsync(id);
+            var operation = await _context.Operation.FindAsync(id);
             if (operation == null)
             {
                 return NotFound();
             }
 
-            _context.Operations.Remove(operation);
+            _context.Operation.Remove(operation);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -136,7 +136,7 @@ namespace gastosapi.Controllers
 
         private bool OperationExists(int id)
         {
-            return (_context.Operations?.Any(e => e.IdOperations == id)).GetValueOrDefault();
+            return (_context.Operation?.Any(e => e.IdOperation == id)).GetValueOrDefault();
         }
     }
 }
