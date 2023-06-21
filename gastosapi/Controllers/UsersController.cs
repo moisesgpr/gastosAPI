@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using gastosapi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace gastosapi.Controllers
 {
@@ -21,7 +22,7 @@ namespace gastosapi.Controllers
         }
 
         // GET: api/Users
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
           if (_context.Users == null)
