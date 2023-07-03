@@ -22,7 +22,7 @@ namespace gastosapi.Controllers
         }
 
         // GET: api/Users
-        [HttpGet, Authorize]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
           if (_context.Users == null)
