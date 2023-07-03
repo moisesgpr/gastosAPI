@@ -35,7 +35,9 @@ namespace gastosapi.Controllers
                 var loggedUser = _context.Users.Single(u => u.Username == user.UserName && u.Password == user.Password);
                 List<Claim> claims = new List<Claim>()
                 {
-                    new Claim("IdUser", loggedUser.IdUser.ToString())
+                    new Claim("IdUser", loggedUser.IdUser.ToString()),
+                    new Claim("UserName", loggedUser.Username.ToString())
+
                 };
 
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));

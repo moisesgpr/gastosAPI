@@ -50,7 +50,7 @@ namespace gastosapi.Controllers
         }
 
         // GET: api/Operation/
-        [HttpGet("/user/{userId}")]
+        [HttpGet("user/{userId}")]
         public async Task<ActionResult<IEnumerable<Operation>>> GetOperationByUser(int userId)
         {
             var operationsUser = _context.Operation.Where(o => o.IdUser == userId);
