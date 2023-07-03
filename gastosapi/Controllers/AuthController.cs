@@ -32,17 +32,17 @@ namespace gastosapi.Controllers
             authUser = _context.Users.Any(u => u.Username == user.UserName && u.Password == user.Password);
             if(authUser)
             {
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[]
+                List<Claim> claims = new List<Claim>()
                 {
                     new Claim("UserName", authUser.ToString())
-                });
+                };
 
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"));
                 var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                 var tokeOptions = new JwtSecurityToken(
                     issuer: "https://localhost:7176",
                     audience: "https://localhost:7176",
-                    claims: (IEnumerable<Claim>)claimsIdentity,
+                    claims: claims,
                     expires: DateTime.Now.AddMinutes(120),
                     signingCredentials: signinCredentials
                 );
