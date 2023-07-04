@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using gastosapi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace gastosapi.Controllers
 {
@@ -50,7 +51,7 @@ namespace gastosapi.Controllers
         }
 
         // GET: api/Operation/
-        [HttpGet("user/{userId}")]
+        [HttpGet("user/{userId}"), Authorize]
         public async Task<ActionResult<IEnumerable<Operation>>> GetOperationByUser(int userId)
         {
             var operationsUser = _context.Operation.Where(o => o.IdUser == userId);
