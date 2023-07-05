@@ -101,7 +101,7 @@ namespace gastosapi.Controllers
 
         // POST: api/Operation
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
+        [HttpPost, Authorize]
         public async Task<ActionResult<Operation>> PostOperation(Operation operation)
         {
           if (_context.Operation == null)
