@@ -43,8 +43,8 @@ app.UseCors(x => x
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials()
-            //.WithOrigins("https://localhost:44351")); // Allow only this origin can also have multiple origins seperated with comma
-            .SetIsOriginAllowed(origin => true));// Allow any origin
+            .WithOrigins("https://localhost:4200", "https://lemon-beach-0a883b610.3.azurestaticapps.net")); // Allow only this origin can also have multiple origins seperated with comma
+            //.SetIsOriginAllowed(origin => true));// Allow any origin
 
 app.UseHttpsRedirection();
 
