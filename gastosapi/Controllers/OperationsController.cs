@@ -51,7 +51,7 @@ namespace gastosapi.Controllers
         }
 
         // GET: api/Operation/
-        [HttpGet("user/{userId}"), Authorize]
+        [HttpGet("user/{userId}")]
         public async Task<ActionResult<IEnumerable<Operation>>> GetOperationByUser(int userId)
         {
             var operationsUser = _context.Operation.Where(o => o.IdUser == userId);
@@ -68,6 +68,56 @@ namespace gastosapi.Controllers
             return await operationsUser.ToListAsync();
         }
 
+        [HttpGet("current/{userId}")]
+        public async Task<ActionResult<IEnumerable<Operation>>> GetOperationUserCurrentMonth(int userId)
+        {
+            var operationsUser = _context.Operation.Where(o => o.IdUser == userId && o.Created.Year == DateTime.Now.Year && o.Created.Month == DateTime.Now.Month);
+
+            if (await _context.Users.FindAsync(userId) == null)
+            {
+                return NotFound("No existe este usuario");
+            }
+
+            if (operationsUser.Count() == 0)
+            {
+                return NotFound();
+            }
+            return await operationsUser.ToListAsync();
+        }
+
+        [HttpGet("last/{userId}")]
+        public async Task<ActionResult<IEnumerable<Operation>>> GetOperationUserLastMonth(int userId)
+        {
+            var operationsUser = _context.Operation.Where(o => o.IdUser == userId && o.Created.Year == DateTime.Now.Year && o.Created.Month.Equals(DateTime.Now.Month -1));
+
+            if (await _context.Users.FindAsync(userId) == null)
+            {
+                return NotFound("No existe este usuario");
+            }
+
+            if (operationsUser.Count() == 0)
+            {
+                return NotFound();
+            }
+            return await operationsUser.ToListAsync();
+        }
+
+        [HttpGet("last2/{userId}")]
+        public async Task<ActionResult<IEnumerable<Operation>>> GetOperationUserLastMonth2(int userId)
+        {
+            var operationsUser = _context.Operation.Where(o => o.IdUser == userId && o.Created.Year == DateTime.Now.Year && o.Created.Month.Equals(DateTime.Now.Month - 2));
+
+            if (await _context.Users.FindAsync(userId) == null)
+            {
+                return NotFound("No existe este usuario");
+            }
+
+            if (operationsUser.Count() == 0)
+            {
+                return NotFound();
+            }
+            return await operationsUser.ToListAsync();
+        }
         // PUT: api/Operation/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]

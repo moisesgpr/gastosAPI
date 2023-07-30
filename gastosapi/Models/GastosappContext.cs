@@ -21,12 +21,13 @@ public partial class GastosappContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=tcp:gastosapp.database.windows.net,1433;Initial Catalog=gastosapp;Persist Security Info=False;User ID=gastosapp;Password=yucafrita2023*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-       
-       // => optionsBuilder.UseSqlServer("Server=PR\\SQLExpress;Database=gastosapp;Trusted_Connection=True;TrustServerCertificate=true");
-        //=> optionsBuilder.UseSqlServer("Server=DESKTOP-SDKDVL8;Database=gastosapp;Trusted_Connection=True;TrustServerCertificate=true");
+        //=> optionsBuilder.UseSqlServer("Server=tcp:gastosapp.database.windows.net,1433;Initial Catalog=gastosapp;Persist Security Info=False;User ID=gastosapp;Password=yucafrita2023*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+    //=> optionsBuilder.UseSqlServer("Server=.;Database=gastosapp;Trusted_Connection=True;TrustServerCertificate=true");
+
+    // => optionsBuilder.UseSqlServer("Server=PR\\SQLExpress;Database=gastosapp;Trusted_Connection=True;TrustServerCertificate=true");
+    //=> optionsBuilder.UseSqlServer("Server=DESKTOP-SDKDVL8;Database=gastosapp;Trusted_Connection=True;TrustServerCertificate=true");
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -53,7 +54,6 @@ public partial class GastosappContext : DbContext
                 .HasColumnType("decimal(16, 2)")
                 .HasColumnName("amount");
             entity.Property(e => e.Created)
-                .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("created");
             entity.Property(e => e.Description)

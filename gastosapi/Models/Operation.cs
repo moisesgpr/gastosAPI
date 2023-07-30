@@ -15,7 +15,7 @@ public partial class Operation
 
     public string Description { get; set; } = null!;
 
-    public string Created { get; set; } = null!;
+    public DateTime Created { get; set; }
 
     internal virtual Category? IdCategoryNavigation { get; set; }
 
