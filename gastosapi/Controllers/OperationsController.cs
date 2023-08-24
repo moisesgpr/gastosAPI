@@ -32,7 +32,7 @@ namespace gastosapi.Controllers
             return await _context.Operation.Include(o => o.IdCategoryNavigation).ToListAsync();
         }
 
-        // GET: api/Operation/5
+        // GET: api/Operation/:id
         [HttpGet("{id}")]
         public async Task<ActionResult<Operation>> GetOperation(int id)
         {
